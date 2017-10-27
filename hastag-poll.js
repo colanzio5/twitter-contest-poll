@@ -51,5 +51,3 @@ stream.on('tweet', function (tweet) {
         }
     }
 });
-
-function isValid()
