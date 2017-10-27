@@ -1,0 +1,16 @@
+{
+  "name": "social-media-campiaign",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hastag-poll.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "twit": "^2.2.9",
+    "twitter": "^1.7.1",
+    "twtcst": "^2.0.0"
+  }
+}
