@@ -1,0 +1,1 @@
+worker: node stream-hastag-filter.js
