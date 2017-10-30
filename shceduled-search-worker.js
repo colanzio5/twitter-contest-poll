@@ -15,14 +15,10 @@ var words = [
     "#drivetoperform"
 ];
 
-var stream = T.stream('statuses/filter', {
-    track: words
-});
 
-
-
-
-
+// var stream = T.stream('statuses/filter', {
+//     track: words
+// });
 
 // stream.on('tweet', function (tweet) {
 //     var valid = tweet.entities.hashtags.filter(function (element) {
