@@ -20,6 +20,8 @@ var stream = T.stream('statuses/filter', {
 });
 
 stream.on('tweet', function (tweet) {
+    console.log(element.text);
+    
     var valid = tweet.entities.hashtags.filter(function (element) {
         return (element.text.toUpperCase() == 'BMW') || (element.text.toUpperCase() == 'SHELLVPOWER') || (element.text.toUpperCase() == 'DRIVETOPERFORM');
     });
