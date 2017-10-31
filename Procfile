@@ -1,1 +1,1 @@
-worker: node scheduled-search-worker.js
+worker: node hashtag-search-filter.js
