@@ -1,2 +1,1 @@
-worker: node stream-hastag-filter.js
-clock: node clock.js
+worker: node scheduled-search-worker.js
