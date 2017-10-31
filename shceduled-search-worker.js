@@ -24,6 +24,7 @@ module.exports = {
         });
 
         valid.forEach(function(element) {
+          console.log("ADDING ELEMENT" + element.id_str)
           firebase.database().ref('tweets/' + element.id_str)
           .set({
             id: element.id_str,
