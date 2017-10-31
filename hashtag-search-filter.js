@@ -29,17 +29,16 @@ var words = [
 ];
 T.get('search/tweets', { q: ["#shellvpower", "#bmw", "#drivetoperform"], count: 100 },
 function(err, data, response) {
-
-  var ref = firebase.database().ref('tweets');
   var valid = data.statuses.filter(function(element) {
-    return element.entities.hashtags.length >= 3;
+    return element.entities.hashtags.length >= 2;
   });
 
   valid.forEach(function(element) {
     firebase.database().ref('tweets/' + element.id_str).set({
       id: element.id_str,
       text: element.text,
-      url: "https://twitter.com/*/status/" + element.id_str
+      url: "https://twitter.com/*/status/" + element.id_str,
+      date: new Date();
     });
   });
 });
