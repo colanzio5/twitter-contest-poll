@@ -1,49 +1,36 @@
-var Twit = require('twit');
-var fs = require('fs');
-var keys = require('./creds.js');
+module.exports = {
+  var Twit = require('twit');
+  var fs = require('fs');
+  var keys = require('./creds.js');
 
-var T = new Twit({
+  var T = new Twit({
     consumer_key: keys.consumer_key,
     consumer_secret: keys.consumer_secret,
     access_token: keys.access_token,
     access_token_secret: keys.access_token_secret,
-});
+  });
 
-var words = [
+  var words = [
     "#shellvpower",
     "#bmw",
     "#drivetoperform"
-];
+  ];
 
+  start: function() {
+    T.get('search/tweets', { q: ["#shellvpower", "#bmw", "#drivetoperform"], count: 100 }, function(err, data, response) {
+        var ref = firebase.database().ref('tweets');
+        var valid = data.statuses.filter(function(element) {
+          return element.entities.hashtags.length >= 3;
+        });
 
-// var stream = T.stream('statuses/filter', {
-//     track: words
-// });
-
-// stream.on('tweet', function (tweet) {
-//     var valid = tweet.entities.hashtags.filter(function (element) {
-//         return (element.text.toUpperCase() == 'BMW') || (element.text.toUpperCase() == 'SHELLVPOWER') || (element.text.toUpperCase() == 'DRIVETOPERFORM');
-//     });
-
-//     valid.forEach(function (element) {
-//         element.text = element.text.toUpperCase();
-//     });
-
-//     valid = valid.filter(function (a) {
-//         if (!this.has(a.text)) {
-//             this.set(a.text, true);
-//             return true;
-//         }
-//     }, new Map);
-
-//     if (valid.length > 1) {
-//         var record = "Entry ID: " + tweet.id_str + ", Tags: ";
-
-//         valid.forEach(function (element) {
-//             record = record + element.text + ",";
-//         });
-
-//         record = record + valid.length.toString() + ", url: https://twitter.com/*/status/" + tweet.id_str + "\n";
-//         fs.appendFile("./output", record);
-//     }
-// });
+        valid.forEach(function(element) {
+          firebase.database().ref('tweets/' + element.id_str)
+          .set({
+            id: element.id_str,
+            text: element.text,
+            url: "https://twitter.com/*/status/" + element.id_str
+          });
+        });
+      });
+  }
+};
